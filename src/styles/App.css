@@ -1,19 +1,4 @@
-.markdown-previwer{
+html, body, #root{
     width: 100%;
-    height: calc(100vh/2);
-    padding: 1rem;
+    height: 100%;
 }
-
-#editor{
-    background: hsla(22, 0%, 14%, 1);
-    color: white;
-    padding: 1rem;
-    font-size: 1rem;
-    border: none;
-    resize: vertical;
-    outline: none;
-    width: 100%;
-    height: calc(100vh/2);
-    font-family: 'Noto Sans', sans-serif;
-}
-

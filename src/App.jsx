@@ -1,52 +1,48 @@
 import "./styles/App.css";
-import ReactMarkdown from "react-markdown";
+import styled from "styled-components"
+import MarkedInput from './components/MarkedInput'
+import Result from "./components/Result";
 import { useState } from "react";
-import remarkGfm from "remark-gfm";
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import EditorContext from "./EditorContext";
+
+const AppContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const Title = styled.div`
+    font-size: 25px;
+    font-weight: 700;
+    font-family: "Lato", sans-serif;
+    margin-bottom: 1em;
+`;
+
+const EditorContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+`;
 
 function App() {
-    const [rawMarkdown, setRawMarkdown] = useState("# Hello");
-
-    const handleMarkdown = (event) => {
-        setRawMarkdown(event.target.value);
+    const [markdownText, setMarkdownText] = useState("");
+    const contextValue = {
+        markdownText,
+        setMarkdownText
     };
 
     return (
-        <div className="container">
-            <textarea
-                autoFocus
-                value={rawMarkdown}
-                onChange={handleMarkdown}
-                id="editor"
-                placeholder="Type your markdown"
-            />
-            <div id="preview">
-                <ReactMarkdown
-                    className="markdown-previwer"
-                    children={rawMarkdown}
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                        code({ node, inline, className, children, ...props }) {
-                            const match = /language-(\w+)/.exec(className || "");
-                            return !inline && match ? (
-                                <SyntaxHighlighter
-                                    children={String(children).replace(/\n$/,"")}
-                                    style={docco}
-                                    language={match[1]}
-                                    PreTag="div"
-                                    {...props}
-                                />
-                            ) : (
-                                <code className={className} {...props}>
-                                    {children}
-                                </code>
-                            );
-                        },
-                    }}
-                />
-            </div>
-        </div>
+        <EditorContext.Provider value={contextValue}>
+            <AppContainer>
+                <Title>Markdown Editor</Title>
+                <EditorContainer>
+                    <MarkedInput />
+                    <Result />
+                </EditorContainer>
+            </AppContainer>
+        </EditorContext.Provider>
     );
 }
 
