@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import styled from "styled-components";
 import EditorContext from "../EditorContext";
+import remarkGfm from "remark-gfm";
 
 const Container = styled.div`
     width: 50%;
@@ -32,7 +33,10 @@ function Result(props) {
         <Container>
             <Title>Converted Text</Title>
             <ResultArea>
-                <ReactMarkdown children={markdownText}></ReactMarkdown>
+                <ReactMarkdown
+                    children={markdownText}
+                    remarkPlugins={[remarkGfm]}
+                ></ReactMarkdown>
             </ResultArea>
         </Container>
     );
