@@ -1,44 +1,48 @@
 import "./styles/App.css";
-import ReactMarkdown from "react-markdown";
+import styled from "styled-components"
+import MarkedInput from './components/MarkedInput'
+import Result from "./components/Result";
 import { useState } from "react";
-import remarkGfm from "remark-gfm";
+import EditorContext from "./EditorContext";
+
+const AppContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const Title = styled.div`
+    font-size: 25px;
+    font-weight: 700;
+    font-family: "Lato", sans-serif;
+    margin-bottom: 1em;
+`;
+
+const EditorContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+`;
 
 function App() {
-    /*MARKDOWN DE EJEMPLO
-    | S/N | Pet | Image |
-    |--|--|--|
-    | 1 | Cat |![A cat looking at you](https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=68615bab04be2077a471009ffc236509) |
-    | 2 | Dog |![A dog looking at you](https://ichef.bbci.co.uk/news/976/cpsprodpb/17638/production/_124800859_gettyimages-817514614.jpg)|
-    
-    - [ ] Task list 1
-    - [ ] Pending task list 2
-    - [x] Completed task list 3
-    - [x] Completed task list 4 
-    
-    - A direct URL: https://www.copycat.dev/*/
-
-    const [rawMarkdown, setRawMarkdown] = useState(`# Hello`);
-
-    const handleMarkdown = (event) => {
-        setRawMarkdown(event.target.value);
+    const [markdownText, setMarkdownText] = useState("");
+    const contextValue = {
+        markdownText,
+        setMarkdownText
     };
 
     return (
-        <div className="container">
-            <textarea
-                autoFocus
-                value={rawMarkdown}
-                onChange={handleMarkdown}
-                id="editor"
-                placeholder="Type your markdown"
-            />
-            <div id="preview">
-                <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    children={rawMarkdown}    
-                />
-            </div>
-        </div>
+        <EditorContext.Provider value={contextValue}>
+            <AppContainer>
+                <Title>Markdown Editor</Title>
+                <EditorContainer>
+                    <MarkedInput />
+                    <Result />
+                </EditorContainer>
+            </AppContainer>
+        </EditorContext.Provider>
     );
 }
 

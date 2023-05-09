@@ -1,33 +1,32 @@
-.markdown-previwer{
-    width: 100%;
-    height: calc(100vh/2);
-    padding: 1rem;
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+table {
+  border-spacing: 0 !important;
+  border-collapse: collapse !important;
+  border-color: inherit !important;
+  display: block !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  overflow: auto !important;
+}
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: inherit !important;
+  border-style: solid !important;
+  border-width: 2px !important;
 }
 
-#editor{
-    background: hsla(22, 0%, 14%, 1);
-    color: white;
-    padding: 1rem;
-    font-size: 1rem;
-    border: none;
-    resize: vertical;
-    outline: none;
-    width: 100%;
-    height: calc(100vh/2);
-    font-family: 'Noto Sans', sans-serif;
+blockquote::before {
+    content: "";
+    background-color: aqua;
+    width: 20px;
+    height: 40px;
 }
-
-img{
-    width: 50%;
-    height: 100%;
-    object-fit: cover;
-  }
-  table{
-    width: 100%;
-    border-collapse: collapse;
-   
-  }
-  th, td{
-    border: 1px solid #ccc;
-    padding: 5px;
-  }
