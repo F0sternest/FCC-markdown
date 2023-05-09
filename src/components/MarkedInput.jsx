@@ -39,7 +39,9 @@ function MarkedInput(props) {
     return (
         <Container>
             <Title>Markdown Text</Title>
-            <TextArea onChange={onInputChange} />
+            <TextArea onChange={onInputChange} id="editor">
+                
+            </TextArea>
         </Container>
     );
 }

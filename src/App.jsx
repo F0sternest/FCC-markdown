@@ -2,7 +2,7 @@ import "./styles/App.css";
 import styled from "styled-components"
 import MarkedInput from './components/MarkedInput'
 import Result from "./components/Result";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditorContext from "./EditorContext";
 
 const AppContainer = styled.div`
@@ -28,6 +28,7 @@ const EditorContainer = styled.div`
 
 function App() {
     const [markdownText, setMarkdownText] = useState("");
+
     const contextValue = {
         markdownText,
         setMarkdownText

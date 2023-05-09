@@ -32,7 +32,7 @@ function Result(props) {
     return (
         <Container>
             <Title>Converted Text</Title>
-            <ResultArea>
+            <ResultArea id="preview">
                 <ReactMarkdown
                     children={markdownText}
                     remarkPlugins={[remarkGfm]}
